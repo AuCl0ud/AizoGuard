@@ -8,6 +8,7 @@
 #include <windowsx.h>
 #include <commdlg.h>
 #include <commctrl.h>
+#include <shlwapi.h>
 #include <mmsystem.h>
 
 #include <gdiplus.h>
@@ -383,6 +384,11 @@ int WINAPI wWinMain(HINSTANCE h,HINSTANCE,LPWSTR command,int show) {
     if(std::wstring(command)==L"--self-test") {bool ok=selfTest(); Gdiplus::GdiplusShutdown(token); return ok?0:2;}
     smokeTest=std::wstring(command)==L"--smoke-test";
     GetPrivateProfileStringW(L"settings",L"audio",L"",path,32768,iniPath.c_str()); audioPath=path;
+    if(audioPath.empty()) audioPath=L"King Gnu - AIZO.mp3";
+    if(PathIsRelativeW(audioPath.c_str())) audioPath=baseDir+L"\\"+audioPath;
+    if(std::wstring(command)==L"--audio-check") {
+        bool ok=playAudio(false);stopAudio();Gdiplus::GdiplusShutdown(token);return ok?0:4;
+    }
     player.setVolume(int(GetPrivateProfileIntW(L"settings",L"volume",100,iniPath.c_str())));
     INITCOMMONCONTROLSEX controls{sizeof(INITCOMMONCONTROLSEX),ICC_BAR_CLASSES};
     InitCommonControlsEx(&controls);
