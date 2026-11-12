@@ -25,7 +25,9 @@
 - 系统播放器循环有可能出现短暂间隙，不提供无缝循环保证。
 - 没有操作游戏、点击、按键注入、读取游戏内存或上传截图。
 
-参考 MAA 的区域模板识别和 Win32 截图架构。原汁原味的 vibe coding 产物，你值得拥有（）
+参考 MAA 的区域模板识别和 Win32 截图架构。
+
+原汁原味的 vibe coding 产物，你值得拥有（）
 
 参考源码（阅读分支 dev-v2）：
 - https://github.com/MaaAssistantArknights/MaaAssistantArknights/blob/dev-v2/src/MaaCore/Vision/Matcher.cpp
